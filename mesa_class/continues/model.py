@@ -4,8 +4,23 @@ from agent import simpleAgent
 import numpy as np
 from fitness import fitness
 class simpleModel(Model):
-    def __init__(self, width, height, num_agents, TARGET_X=5, TARGET_Y=5, THRESHOLD=0.1, w=0.5, C1=2.0, C2=2.0, w_2=0.5, C1_2=2.0, C2_2=2.0):
+    def sum_distances(self):
+        total_distance = 0
+        agents_in_swarm_1 = self.agents_by_type[simpleAgent].select(lambda a: a.swarm_id == 1)
+        for agent_i in agents_in_swarm_1:
+            for agent_j in agents_in_swarm_1:
+                if agent_i != agent_j:
+                    total_distance += np.linalg.norm(np.array(agent_i.pos) - np.array(agent_j.pos))
+        agents_in_swarm_2 = self.agents_by_type[simpleAgent].select(lambda a: a.swarm_id == 2)
+        for agent_i in agents_in_swarm_2:
+            for agent_j in agents_in_swarm_2:
+                if agent_i != agent_j:
+                    total_distance += np.linalg.norm(np.array(agent_i.pos) - np.array(agent_j.pos))
+        return total_distance
+    def __init__(self, width, height, num_agents, TARGET_X=5, TARGET_Y=5, THRESHOLD=0.1, w=0.5, C1=2.0, C2=2.0, w_2=0.5, C1_2=2.0, C2_2=2.0, rng = None):
         super().__init__()
+        if rng is not None:
+            self.random = rng
         self.space = ContinuousSpace(x_max=width, y_max=height, torus=False)
         self.num_agents = num_agents
         self.TARGET_X = TARGET_X
@@ -38,8 +53,7 @@ class simpleModel(Model):
                 else:
                     swarm_id = 2
         self.datacollector = DataCollector(
-            model_reporters={"best_fitness_1": lambda m: m.best_fitness(swarm_id=1),     # Get best fitness for swarm 1
-                             "best_fitness_2": lambda m: m.best_fitness(swarm_id=2)}     # Get best fitness for swarm 2
+            model_reporters={"distance_sum": lambda m: m.sum_distances()}
         )
         self.make_fitness_cotour()
     

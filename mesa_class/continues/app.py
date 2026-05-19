@@ -148,7 +148,7 @@ def plot_fitness_contour(model):
 page = SolaraViz(
     model,
     renderer,
-    components=[best_fitness],
+    components=[],
     model_params=model_params,
     name="Swarm Robotics class - Continuous Space",
 )

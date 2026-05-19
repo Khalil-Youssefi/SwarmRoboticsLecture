@@ -11,7 +11,16 @@ import warnings
 model_params = {
     "width": 20,
     "height": 20,
-    "num_agents": 5
+    "num_agents": 5,
+    "TARGET_X": 5,
+    "TARGET_Y": 5,
+    "THRESHOLD": 0.1,
+    "w": 0.5,
+    "C1": 2.0,
+    "C2": 2.0,
+    "w_2": 0.5,
+    "C1_2": 2.0,
+    "C2_2": 2.0
 }
 
 warnings.simplefilter("ignore", category=FutureWarning)
