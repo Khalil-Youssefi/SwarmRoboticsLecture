@@ -1,0 +1,114 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.36097197409110876 0.8637510680836789 -0.35161531011187747 1.7426691574931819
+  position -0.04993642579665957 0.0949733112761467 1.1320036777501319
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+}
+Robot {
+  translation 0 0 0.05
+  children [
+    DEF wheel_shape Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.666667 0
+        roughness 1
+        metalness 0
+      }
+      geometry Sphere {
+        radius 0.05
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+      }
+      device [
+        RotationalMotor {
+          maxTorque 0.5
+        }
+      ]
+      endPoint Solid {
+        rotation 1 0 0 0
+        physics Physics {
+        }
+      }
+    }
+  ]
+  boundingObject DEF wheel_shape Shape {
+    appearance PBRAppearance {
+      baseColor 0 0.666667 0
+      roughness 1
+      metalness 0
+    }
+    geometry Sphere {
+      radius 0.05
+    }
+  }
+  physics Physics {
+  }
+  controller "new_robot"
+}
+Solid {
+  translation 0 0.25 0.05
+  children [
+    DEF obstacle_shape Shape {
+      appearance PBRAppearance {
+      }
+      geometry Cylinder {
+        height 0.1
+        radius 0.02
+      }
+    }
+  ]
+  boundingObject USE obstacle_shape
+  physics DEF obstacle_ph Physics {
+    density -1
+    mass 0.3
+  }
+}
+Solid {
+  translation 0 0.3 0.05
+  children [
+    USE obstacle_shape
+  ]
+  name "solid(1)"
+  boundingObject USE obstacle_shape
+  physics USE obstacle_ph
+}
+Solid {
+  translation 0 0.35 0.05
+  children [
+    USE obstacle_shape
+  ]
+  name "solid(2)"
+  boundingObject USE obstacle_shape
+  physics USE obstacle_ph
+}
+Solid {
+  translation -0.05 0.29 0.05
+  children [
+    USE obstacle_shape
+  ]
+  name "solid(3)"
+  boundingObject USE obstacle_shape
+  physics USE obstacle_ph
+}
+Solid {
+  translation 0.05 0.29 0.05
+  children [
+    USE obstacle_shape
+  ]
+  name "solid(4)"
+  boundingObject USE obstacle_shape
+  physics USE obstacle_ph
+}
