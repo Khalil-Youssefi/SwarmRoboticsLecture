@@ -7,3 +7,9 @@ centralWidgetVisible: 1
 orthographicViewHeight: 1
 textFiles: -1
 consoles: Console:All:All
+renderingDevicePerspectives: e-puck(1):camera;1;1;0;0
+renderingDevicePerspectives: e-puck(2):camera;1;1;0;0
+renderingDevicePerspectives: e-puck(3):camera;1;1;0;0
+renderingDevicePerspectives: e-puck(4):camera;1;1;0;0
+renderingDevicePerspectives: e-puck(5):camera;1;1;0;0
+renderingDevicePerspectives: e-puck:camera;1;1;0;0

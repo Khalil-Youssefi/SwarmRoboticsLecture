@@ -1,19 +1,16 @@
 #VRML_SIM R2025a utf8
 
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.46632455463401296 0.5645544183340631 0.6810431105920369 1.762590466663707
-  position -0.2790460294885216 -1.2239162902967093 3.040966552843998
+  orientation -0.5696135337758922 0.5753383904106653 0.5869635070930775 2.0712876470396444
+  position -0.07210000221106955 -0.14253943249455275 3.271621437600837
 }
 TexturedBackground {
-}
-TexturedBackgroundLight {
 }
 RectangleArena {
 }
@@ -22,7 +19,39 @@ E-puck {
   rotation 0 1 0 4.692820414042842e-06
   controller "follow_light"
 }
+E-puck {
+  translation -0.14 0.27 0
+  rotation 2.3464099999741633e-06 -4.064099999955249e-06 0.9999999999889888 -1.047195307179586
+  name "e-puck(1)"
+  controller "follow_light"
+}
+E-puck {
+  translation -0.04 -0.29 0
+  rotation 0 1 0 4.692820414042842e-06
+  name "e-puck(2)"
+  controller "follow_light"
+}
+E-puck {
+  translation 0.05 0.23 4.69446e-08
+  rotation 2.346409999993077e-06 -6.287189999981451e-07 0.9999999999970497 -2.6179953071795863
+  name "e-puck(3)"
+  controller "follow_light"
+}
+E-puck {
+  translation 0.16 -0.29 0
+  rotation 0 1 0 4.692820414042842e-06
+  name "e-puck(4)"
+  controller "follow_light"
+}
+E-puck {
+  translation 0.26 -0.29 0
+  rotation 0 1 0 4.692820414042842e-06
+  name "e-puck(5)"
+  controller "follow_light"
+}
 PointLight {
   attenuation 0 0 1
-  intensity 5
+  intensity 2.4
+  location 0.4 0 0.3
+  radius 2
 }

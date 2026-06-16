@@ -1,4 +1,5 @@
 from controller import Robot, Motor, DistanceSensor, device, distance_sensor
+import numpy as np
 
 DISTANCE_SENSORS_NUMBER  = 8
 LIGHT_SENSORS_NUMBER = 8
@@ -39,17 +40,26 @@ while robot.step(timestep) != -1:
     # try to follow the light source
     left_speed = MAX_SPEED
     right_speed = MAX_SPEED
+    print(f"Light sensor values: {ls_values}")
     reference_light_value = (ls_values[0] + ls_values[7]) / 2
+    right_light_value = np.mean((ls_values[0], ls_values[1], ls_values[2], ls_values[3]))
+    left_light_value = np.mean((ls_values[4], ls_values[5], ls_values[6], ls_values[7]))
     THRESHOLD = 0.1 * reference_light_value
-    if ls_values[0] - reference_light_value > THRESHOLD:
+    if reference_light_value - left_light_value> THRESHOLD:
+        # turn left
         left_speed = -MAX_SPEED
         right_speed = MAX_SPEED
-    elif ls_values[7] - reference_light_value > THRESHOLD:
+        print(f"Turning left: left_light_value={left_light_value}, reference_light_value={reference_light_value}")
+    elif reference_light_value - right_light_value > THRESHOLD:
+        # turn right
         left_speed = MAX_SPEED
-        right_speed = -MAX_SPEED
+        right_speed = MAX_SPEED
+        print(f"Turning right: right_light_value={right_light_value}, reference_light_value={reference_light_value}")
+    else:
+        print(f"Going straight: left_light_value={left_light_value}, right_light_value={right_light_value}, reference_light_value={reference_light_value}")
     
     # if any sensor detects an obstacle, EMERGENCY STOP
-    if any(value > 100 for value in ps_values):
+    if any(value > 100 for value in ps_values[-1:1]):
         left_speed = 0
         right_speed = 0
     
