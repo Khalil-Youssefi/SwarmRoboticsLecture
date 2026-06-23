@@ -1,5 +1,6 @@
 from controller import Robot
 from math import atan2, sqrt, sin, cos
+import numpy as np
 robot = Robot()
 timestep = int(robot.getBasicTimeStep())
 
@@ -25,18 +26,24 @@ motor_left.setVelocity(0)
 motor_right.setVelocity(0)
 while robot.step(timestep) != -1:
     light_values = [sensor.getValue() for sensor in light_sensors]
-    # print("Light sensor values:", end=' ')
-    # for i, value in enumerate(light_values):
-    #     print(f"ls{i}: {value:.2f}", end=' ')
-    # print()  # Print a newline after all light sensor values
-    group_left = light_values[4] + light_values[5] + light_values[6] + light_values[7]
-    group_right = light_values[0] + light_values[1] + light_values[2] + light_values[3]
-    if (group_left - group_right) > 5:
+    reference_light_value = (light_values[0] + light_values[7])/2
+    THRESHOLD = np.mean(light_values) * 0.05
+    left_avg = sum(light_values[4:7]) / 4
+    right_avg = sum(light_values[1:4]) / 4
+    print("Light values:", light_values)
+    print("Reference light value:", reference_light_value, "Left average:", left_avg, "Right average:", right_avg)
+    if (left_avg - reference_light_value) > THRESHOLD and (right_avg - reference_light_value) > THRESHOLD:
         motor_left.setVelocity(3)
-        motor_right.setVelocity(1)
-    elif (group_right - group_left) > 5:
-        motor_left.setVelocity(1)
         motor_right.setVelocity(3)
+        print("Moving forward")
     else:
-        motor_left.setVelocity(3)
-        motor_right.setVelocity(3)
+        if left_avg - reference_light_value < THRESHOLD:
+            motor_left.setVelocity(-3)
+            motor_right.setVelocity(3)
+            robot.step(10*timestep)
+            print("Turning left")
+        else:
+            motor_left.setVelocity(3)
+            motor_right.setVelocity(-3)
+            robot.step(10*timestep)
+            print("Turning right")
