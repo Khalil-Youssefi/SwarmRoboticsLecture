@@ -3,12 +3,13 @@
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+IMPORTABLE EXTERNPROTO "../protos/icons/obstacle_inclass.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.5773502691896257 0.5773502691896257 0.5773502691896257 2.0944
-  position -2.3036649486124802e-05 -2.303671462524614e-05 1.8530201887847497
+  orientation -0.30054505124346587 0.17828196735281382 0.9369568892376388 2.127033652190915
+  position 0.7843341374257223 -1.3817685954443246 1.2411869776653142
 }
 TexturedBackground {
 }
@@ -16,6 +17,7 @@ RectangleArena {
 }
 PointLight {
   attenuation 0 0 1
+  intensity 0.5
   radius 1
 }
 Robot {

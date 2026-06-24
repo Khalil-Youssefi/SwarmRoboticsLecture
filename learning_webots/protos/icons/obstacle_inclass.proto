@@ -1,0 +1,23 @@
+#VRML_SIM R2025a utf8
+PROTO obstacle_inclass [
+  field SFVec3f    translation  0 0 0.035
+]
+{
+  Solid {
+    translation IS translation
+    children [
+        DEF obstacle_inclass Shape {
+        appearance PBRAppearance {
+            baseColor 0 1 0.498039
+            metalness 0
+        }
+        geometry Box {
+            size 0.07 0.07 0.07
+        }
+        }
+    ]
+    boundingObject USE obstacle_inclass
+    physics Physics {
+    }
+  }
+}
